@@ -76,7 +76,7 @@ function App() {
 
   return (
     <div className="App">
-      <video ref={videoRef} autoPlay onPlay={handleVideoOnPlay} muted/>
+      <video ref={videoRef} onPlay={handleVideoOnPlay} muted autoPlay playsInline/>
       <canvas ref={canvasRef} />
       <button onClick={toggleCamera}>Toggle Camera</button>
     </div>

@@ -4,7 +4,6 @@ import * as faceapi from 'face-api.js';
 
 function App() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [facingMode, setFacingMode] = useState<"user" | "environment">("user");
 
   useEffect(() => {

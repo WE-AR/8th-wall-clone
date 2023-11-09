@@ -1,38 +1,38 @@
+/* App.css 또는 해당 스타일 시트에 추가 */
+
+/* 모든 요소의 기본 마진과 패딩을 제거합니다. */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 화면을 가득 채우는 컨테이너 스타일 */
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  height: 100vh; /* 뷰포트 높이의 100%를 차지하도록 설정 */
+  width: 100vw; /* 뷰포트 너비의 100%를 차지하도록 설정 */
+  overflow: hidden; /* 화면을 벗어나는 부분은 숨깁니다 */
+  display: flex; /* Flexbox를 사용하여 자식 요소를 중앙에 위치시킵니다 */
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  position: relative; /* 포지셔닝 기준점 설정 */
 }
 
-.App-link {
-  color: #61dafb;
+/* 비디오 요소 스타일 */
+video {
+  position: absolute; /* 비디오 요소를 절대 위치로 설정 */
+  top: 0;
+  left: 0;
+  width: 100%; /* 부모 요소의 100% 너비를 차지하도록 설정 */
+  height: 100%; /* 부모 요소의 100% 높이를 차지하도록 설정 */
+  object-fit: cover; /* 비디오를 화면 비율에 맞게 늘려서 채웁니다 */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* 캔버스 요소 스타일 (선택적) */
+canvas {
+  position: absolute; /* 캔버스도 비디오 위에 겹쳐서 절대 위치로 설정 */
+  top: 0;
+  left: 0;
+  width: 100%; /* 비디오와 동일한 크기로 설정 */
+  height: 100%;
 }

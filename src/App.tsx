@@ -11,7 +11,7 @@ function App() {
     const instance = videoRef.current;
     // 모델 로드
     const loadModels = async () => {
-      // await faceapi.nets.tinyFaceDetector.loadFromUri('/models');
+      await faceapi.nets.tinyFaceDetector.loadFromUri('/models');
       await faceapi.nets.faceLandmark68Net.loadFromUri('/models');
       await faceapi.nets.faceRecognitionNet.loadFromUri('/models');
     };

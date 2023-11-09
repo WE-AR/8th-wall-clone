@@ -11,9 +11,13 @@ function App() {
     const instance = videoRef.current;
     // 모델 로드
     const loadModels = async () => {
-      await faceapi.nets.tinyFaceDetector.loadFromUri('/models');
-      await faceapi.nets.faceLandmark68Net.loadFromUri('/models');
-      await faceapi.nets.faceRecognitionNet.loadFromUri('/models');
+      try {
+        await faceapi.nets.tinyFaceDetector.loadFromUri('/models');
+        await faceapi.nets.faceLandmark68Net.loadFromUri('/models');
+        await faceapi.nets.faceRecognitionNet.loadFromUri('/models');
+      } catch (e) {
+        console.error(e);
+      }
     };
 
     // 카메라 설정 및 비디오 스트림 시작
@@ -33,7 +37,11 @@ function App() {
       }
     };
 
-    startVideo();
+    startVideo().then((a) => {
+      console.log(a)
+    }).catch((e) => {
+      console.error(e)
+    })
 
     return () => {
       if (instance && instance.srcObject) {

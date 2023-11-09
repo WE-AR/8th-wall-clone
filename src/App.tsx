@@ -8,6 +8,7 @@ function App() {
   const [facingMode, setFacingMode] = useState<"user" | "environment">("user");
 
   useEffect(() => {
+    const instance = videoRef.current;
     // 모델 로드
     const loadModels = async () => {
       // await faceapi.nets.tinyFaceDetector.loadFromUri('/models');
@@ -22,8 +23,8 @@ function App() {
       if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         navigator.mediaDevices.getUserMedia({ video: { facingMode } })
           .then((stream) => {
-            if (videoRef.current) {
-              videoRef.current.srcObject = stream;
+            if (instance) {
+              instance.srcObject = stream;
             }
           })
           .catch((error) => {
@@ -35,8 +36,8 @@ function App() {
     startVideo();
 
     return () => {
-      if (videoRef.current && videoRef.current.srcObject) {
-        (videoRef.current.srcObject as MediaStream).getTracks().forEach((track) => {
+      if (instance && instance.srcObject) {
+        (instance.srcObject as MediaStream).getTracks().forEach((track) => {
           track.stop();
         });
       }

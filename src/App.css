@@ -7,6 +7,11 @@
   box-sizing: border-box;
 }
 
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
 /* 화면을 가득 채우는 컨테이너 스타일 */
 .App {
   height: 100vh; /* 뷰포트 높이의 100%를 차지하도록 설정 */

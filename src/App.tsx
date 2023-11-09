@@ -16,6 +16,7 @@ function App() {
         await faceapi.nets.faceLandmark68Net.loadFromUri('/models');
         await faceapi.nets.faceRecognitionNet.loadFromUri('/models');
       } catch (e) {
+        console.log('모델 불러올 때 에러 발생')
         console.error(e);
       }
     };
@@ -37,11 +38,7 @@ function App() {
       }
     };
 
-    startVideo().then((a) => {
-      console.log(a)
-    }).catch((e) => {
-      console.error(e)
-    })
+    startVideo();
 
     return () => {
       if (instance && instance.srcObject) {
@@ -55,9 +52,10 @@ function App() {
   // 얼굴 인식 및 캔버스에 렌더링
   const handleVideoOnPlay = async () => {
     const video = videoRef.current;
-    const canvas = canvasRef.current;
+    const canvas = faceapi.createCanvasFromMedia(video!);
+    document.body.append(canvas);
     if (video && canvas) {
-      const displaySize = { width: video.width, height: video.height };
+      const displaySize = { width: 1000, height: 1000};
       faceapi.matchDimensions(canvas, displaySize);
 
       setInterval(async () => {
@@ -65,6 +63,7 @@ function App() {
         const resizedDetections = faceapi.resizeResults(detections, displaySize);
         canvas.getContext('2d')?.clearRect(0, 0, canvas.width, canvas.height);
         faceapi.draw.drawDetections(canvas, resizedDetections);
+        faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
       }, 100);
     }
   };
@@ -77,7 +76,6 @@ function App() {
   return (
     <div className="App">
       <video ref={videoRef} onPlay={handleVideoOnPlay} muted autoPlay playsInline/>
-      <canvas ref={canvasRef} />
       <button onClick={toggleCamera}>Toggle Camera</button>
     </div>
   );
